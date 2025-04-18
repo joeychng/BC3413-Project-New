@@ -376,7 +376,7 @@ def userguide(username):
     if request.method == 'POST':
         query = request.form.get('company_name', '').strip()
         if query:
-            conn = init_db()
+            conn = sqlite3.connect(DB_NAME)
             search_results = search_company_by_name(conn, query)
             conn.close()
 
