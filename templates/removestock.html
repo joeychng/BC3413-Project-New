@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Remove Stock</title>
-    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -34,57 +33,6 @@
             z-index: -1;
         }
 
-  {#/* Top Navigation Bar */#}
-  {#      .top_nav {#}
-  {#          display: flex;#}
-  {#          justify-content: space-between;#}
-  {#          align-items: center;#}
-  {#          padding: 15px 30px;#}
-  {#          background-color: white;#}
-  {#          box-shadow: 0 2px 10px rgba(26, 86, 219, 0.1);#}
-  {#          border-radius: 12px;#}
-  {#          max-width: 1200px;#}
-  {#          margin: 20px auto;#}
-  {#          width: 100%;#}
-  {#      }#}
-  {##}
-  {#      .nav_logo {#}
-  {#          font-size: 20px;#}
-  {#          font-weight: 700;#}
-  {#          color: var(--primary);#}
-  {#          display: flex;#}
-  {#          align-items: center;#}
-  {#          gap: 8px;#}
-  {#          padding-left: 15px;#}
-  {#      }#}
-  {##}
-  {#      .nav_actions {#}
-  {#          display: flex;#}
-  {#          justify-content: center;#}
-  {#          flex-grow: 1;#}
-  {#      }#}
-  {##}
-  {#      .logout_button {#}
-  {#        padding: 10px 16px;#}
-  {#        background-color: var(--primary);#}
-  {#        color: white;#}
-  {#        border: none;#}
-  {#        border-radius: 8px;#}
-  {#        font-size: 14px;#}
-  {#        font-weight: 500;#}
-  {#        cursor: pointer;#}
-  {#        display: flex;#}
-  {#        align-items: center;#}
-  {#        gap: 8px;#}
-  {#        transition: all 0.2s ease;#}
-  {#      }#}
-  {##}
-  {#      .logout_button:hover {#}
-  {#        background-color: var(--primary-dark);#}
-  {#        transform: translateY(-1px);#}
-  {#      }#}
-
-            /* Top Navigation Bar */
         .top_nav {
     display: flex;
     justify-content: space-between;
@@ -206,30 +154,6 @@
             font-size: 18px;
             display: none;
         }
-
-        {#/* Back Button Styling */#}
-        {#.back-button {#}
-        {#    padding: 10px 16px;#}
-        {#    background-color: #f0f0f0;#}
-        {#    color: #333;#}
-        {#    border: none;#}
-        {#    border-radius: 8px;#}
-        {#    font-size: 14px;#}
-        {#    font-weight: 500;#}
-        {#    cursor: pointer;#}
-        {#    display: flex;#}
-        {#    align-items: center;#}
-        {#    gap: 8px;#}
-        {#    position: fixed;  /* Fixed button at the bottom */#}
-        {#    bottom: 20px;#}
-        {#    left: 20px;       /* Positioned at the left */#}
-        {#    transition: all 0.2s ease;#}
-        {#}#}
-        {##}
-        {#.back-button:hover {#}
-        {#    background-color: #e0e0e0;#}
-        {#}#}
-
         @media (max-width: 768px) {
             .container {
                 width: 90%;
@@ -238,20 +162,6 @@
     </style>
 </head>
 <body>
-
-{#<!-- Top Navigation Bar with Back and Logout Buttons -->#}
-{#    <div class="top_nav">#}
-{#        <div class="nav_logo">#}
-{#            <i class="fas fa-chart-line"></i> EasyFinance#}
-{#        </div>#}
-{#        <div class="na_actions">#}
-{#            <button id="logoutButton" class="logout_button">#}
-{#            <i class="fas fa-sign-out-alt"></i> Logout#}
-{#            </button>#}
-{#        </div>#}
-{#    </div>#}
-
-    <!-- Top Navigation Bar -->
 <div class="top_nav">
     <div class="nav_logo">
         <i class="fas fa-chart-line"></i> EasyFinance
@@ -268,14 +178,9 @@
     </div>
 </div>
 
-    <!-- Background Banner -->
     <div class="banner"></div>
-
-    <!-- Main Container -->
     <div class="container">
         <h2>Remove Stock</h2>
-
-        <!-- Ticker Input Form -->
         <form id="salestock-form">
             <div class="form-group">
                 <label for="ticker-input">Enter Stock Ticker:</label>
@@ -289,7 +194,6 @@
 
                 <button type="button" id="check-price" class="form-button">Check Live Price</button>
 
-                <!-- Price confirmation section (hidden initially) -->
                 <div id="price-section" style="display: none;">
                     <p>Live price: $<span id="live-price"></span></p>
                     <p><strong>Remove at this price?</strong></p>
@@ -300,7 +204,6 @@
 
                 </div>
 
-                <!-- Manual price input section -->
                 <div id="manual-price-sale-section" style="display: none;">
                     <label for="sale_price">Enter Selling Price:</label>
                     <input type="number" step="0.01" id="sale_price" class="form-input">
@@ -310,11 +213,6 @@
             </div>
         </form>
     </div>
-
-{#    <!-- Back Button -->#}
-{#    <button class="back-button" onclick="window.history.back()">#}
-{#        <i class="fas fa-arrow-left"></i> Back#}
-{#    </button>#}
 
     <script>
         const username = "{{ username }}";
