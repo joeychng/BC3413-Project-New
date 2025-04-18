@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Stock</title>
-    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -34,7 +33,6 @@
             z-index: -1;
         }
 
-      /* Top Navigation Bar */
         .top_nav {
     display: flex;
     justify-content: space-between;
@@ -165,8 +163,6 @@
     </style>
 </head>
 <body>
-
-    <!-- Top Navigation Bar -->
 <div class="top_nav">
     <div class="nav_logo">
         <i class="fas fa-chart-line"></i> EasyFinance
@@ -183,14 +179,9 @@
     </div>
 </div>
 
-    <!-- Background Banner -->
     <div class="banner"></div>
-
-    <!-- Main Container -->
     <div class="container">
         <h2>Add Stock</h2>
-
-        <!-- Ticker Input Form -->
         <form id="addstock-form">
             <div class="form-group">
                     <label for="ticker-input">Enter Stock Ticker:</label>
@@ -265,14 +256,9 @@ document.getElementById('yes-add-button').addEventListener('click', async () => 
         alert("Live price not available.");
         return;
     }
-
-    // Pre-fill the price input with live price (optional if form needs it)
     priceInput.value = fetchedPrice.toFixed(2);
-
-    // Submit the form programmatically
     document.getElementById('addstock-form').requestSubmit();
 });
-
 
     document.getElementById('no-add-button').addEventListener('click', () => {
         manualSection.style.display = 'block';
