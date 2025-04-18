@@ -4,7 +4,7 @@ import json
 import csv
 # import datetime
 import nltk
-from db import init_db, view_portfolio, visualise_portfolio, load_csv_data, insert_data_to_db, fetch_stock_data, search_company_by_name, fetch_historical_price, get_company_name
+from db import init_db,DB_NAME, view_portfolio, visualise_portfolio, load_csv_data, insert_data_to_db, fetch_stock_data, search_company_by_name, fetch_historical_price, get_company_name
 from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
@@ -21,7 +21,6 @@ import requests
 import numpy as np
 import math
 from scipy.stats import norm
-
 
 
 app = Flask(__name__)
@@ -56,7 +55,7 @@ def format_currency(value):
     except (ValueError, TypeError):
         return "-"
 
-#Homepage -------------------------------------------------------
+#Homepage -----------------------------------------------------------------------------------
 @app.route('/', methods=['GET', 'POST'])
 def homepage():
     if request.method == 'POST':
@@ -130,9 +129,7 @@ class User:
         self.conn.commit()
 
 
-#==============
-# Register
-#==============
+#Register -----------------------------------------------------------------------------------
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -157,9 +154,7 @@ def register():
     return render_template('register.html')
 
 
-#==============
-# Login
-#==============
+#Login -----------------------------------------------------------------------------------
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -238,7 +233,6 @@ def reset_password():
     return render_template('reset_password.html', password_error=password_error)
 
 #Dashboard ----------------------------------------------
-
 @app.route("/dashboard/<username>")
 def dashboard(username):
     conn = init_db()
@@ -382,7 +376,7 @@ def userguide(username):
 
     return render_template('userguide.html', results=search_results, query=query, username=username)
 
-#Add Stocks-----------------------------
+#Add Stocks---------------------------------------------------------------------
 @app.route("/dashboard/<username>/add_stock", methods=["GET", "POST"])
 def add_stock_route(username):
     if request.method == "POST":
@@ -446,7 +440,7 @@ def get_price():
         print(f"Error: {e}")
         return jsonify({'error': str(e)}), 500
 
-# Remove Stocks --------------------------------------------
+# Remove Stocks ----------------------------------------------------------
 @app.route('/dashboard/<username>/remove_stock', methods=['GET', 'POST'])
 def remove_stock(username):
     if request.method == 'GET':
@@ -557,9 +551,6 @@ def get_sale_price():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-
-
-
 # Risk Tolerance -----------------------------------------------------------------
 @app.route('/dashboard/<username>/risk_tolerance', methods=['GET', 'POST'])
 def risk_tolerance(username):
@@ -575,14 +566,14 @@ def risk_tolerance(username):
         new_risk_tolerance = user.fetch_risk_tolerance(username)
     return render_template('risk_tolerance.html', risk_tolerance=new_risk_tolerance, username=username)
 
-# Transaction History -----------------------------------
+# Transaction History -------------------------------------------------------
 @app.route('/dashboard/<username>/transaction_history')
 def transaction_history(username):
     session_username = session.get('login_username')
     if not session_username or session_username != username:
         return redirect(url_for('login'))  # or handle unauthorized access
 
-    conn = init_db()
+    conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
     cursor.execute('''
         SELECT purchase_date, ticker, shares, purchase_price,
@@ -616,7 +607,7 @@ def transaction_history(username):
 
     return render_template("transaction_history.html", transactions=data, username=username)
 
-#Stock Information--------------------------------------------------------------------------------------------------
+#Stock Information-----------------------------------------------------------------------------------------------------
 def fetch_stock_data(ticker):
     stock = yf.Ticker(ticker)
     info = stock.info
@@ -755,7 +746,7 @@ def get_stock_info(username):
     except Exception as e:
         return jsonify({"error": str(e)}), 500  # Return error if something goes wrong
 
-#Recommendation ------------------------------------------
+#Recommendation ---------------------------------------------------------------------------------
 @app.route('/dashboard/<username>/recommendation_menu')
 def recommendation_menu(username):
     return render_template("recommendation_menu.html", username=username)
@@ -893,7 +884,7 @@ def market_sentiment_page(username):
                            username=username)
 
 
-# Logout----------------------------------------------------------------
+# Logout-------------------------------------------------------------------
 @app.route("/logout", methods=["POST"])
 def logout():
     # Clear the session
