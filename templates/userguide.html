@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="/static/navigation_bar.css">
 
     <style>
-        /* Reset and base styles */
         * {
             margin: 0;
             padding: 0;
@@ -64,7 +63,6 @@
             border: 1px solid rgba(26, 86, 219, 0.05);
         }
 
-        /* Header styles */
         .header {
             padding: 30px;
             background: linear-gradient(to right, var(--primary), var(--primary-dark));
@@ -150,7 +148,6 @@
             font-size: 16px;
         }
 
-        /* Table styles */
         .table-container {
             overflow-x: auto;
             padding: 0;
@@ -324,9 +321,6 @@
         <div class="nav-actions">
             <a href="javascript:history.back()" class="nav-button">
                 <i class="fas fa-arrow-left"></i> Back
-            </a>
-            <a href="{{ url_for('dashboard', username=session['login_username']) }}" class="nav-button">
-                <i class="fas fa-chart-pie"></i> Dashboard
             </a>
              <form action="{{ url_for('logout') }}" method="POST" style="display:inline;">
                 <button type="submit" class="logout-button">
