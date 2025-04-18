@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyFinance Dashboard</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #d6eaf8;
+            color: #333;
+            text-align: center;
+        }
+
+        .nav-logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .header {
+            background-color: #0044cc;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            color: white;
+        }
+        .header img {
+            height: 50px;
+            margin-right: 10px;
+        }
+        .header-title {
+            font-size: 24px;
+            font-weight: bold;
+            flex-grow: 1;
+            text-align: left;
+        }
+        .header-buttons {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown button {
+            background-color: #191970FF;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .dropdown button:hover {
+            background-color: #003f7f;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 220px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            z-index: 1;
+            right: 0;
+        }
+        .dropdown-content a {
+            color: #333;
+            padding: 12px;
+            display: block;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+                .logout-button {
+            padding: 10px 16px;
+            background-color: midnightblue;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .logout-button:hover {
+            background-color: #0d47a1;
+            transform: translateY(-1px);
+        }
+
+        .welcome-section {
+            background-color: #0056b3;
+            color: white;
+            padding: 60px 20px;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 15px;
+            margin: 20px;
+        }
+        .empty-portfolio {
+            text-align: center;
+            padding: 50px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 0px;
+            margin: 20px;
+        }
+        .add-stock-button {
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .add-stock-button:hover {
+            background-color: #3498db;
+        }
+        .container {
+            display: flex;
+            justify-content: center;  /* Centers everything horizontally */
+            align-items: flex-start;
+            gap: 40px; /* Space between chart and tables */
+}
+
+        .chart-container {
+            flex: 1;
+            max-width: 45%;
+            text-align: center; /* Centers chart title */
+        }
+
+       .table-container {
+            flex: 1;
+            max-width: 50%;
+            text-align: center; /* Centers "Your Portfolio" title */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+       .table-container table {
+           width: 100%;
+           border-collapse: collapse;
+           background: white;
+       }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #0d47a1;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .chart-container, .table-container {
+                max-width: 100%;
+                margin: 0;
+            }
+            .header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .header-buttons {
+                margin-top: 10px;
+            }
+            .table-container {
+                margin-top: 20px;
+            }
+        }
+        .export-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .export-button {
+            background-color: dodgerblue;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .export-button:hover {
+            background-color: cornflowerblue;
+            }
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Import Portfolio Section */
+        .import-portfolio {
+            background-color: #191970FF; /* Dark Blue */
+            color: white;
+            padding: 40px;
+            border-radius: 0px;
+            margin-top: 30px;
+        }
+        .import-portfolio h2 {
+            font-size: 28px;
+        }
+        .import-portfolio form {
+            margin-top: 20px;
+        }
+        .import-portfolio label,
+        .import-portfolio input {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .import-portfolio button {
+            background-color: lightsteelblue;
+            color: #003366;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .import-portfolio button:hover {
+            background-color: cornflowerblue;
+        }
+        .import-portfolio a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            display: inline-block;
+            margin-top: 15px;
+        }
+        #import-portfolio-section {
+            margin-top: 60px; /* Adjust as needed to ensure it isn't hidden under fixed elements */
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="nav-logo">
+            <i class="fas fa-chart-line"></i> EasyFinance
+        </div>
+        <div class="header-buttons">
+            <div class="dropdown">
+                <button>Menu</button>
+                <div class="dropdown-content">
+                    <a href="/dashboard/{{ username }}/user_guide">User Guide</a>
+                    <a href="#import-portfolio-section">Import Portfolio</a>
+                    <a href="/dashboard/{{ username }}/add_stock">Add Stock</a>
+                    <a href="/dashboard/{{ username }}/remove_stock">Remove Stock</a>
+                    <a href="/dashboard/{{ username }}/transaction_history">View Past Transactions</a>
+                    <a href="/dashboard/{{ username }}/info_menu">Fetch Stock Information</a>
+                    <a href="/dashboard/{{ username }}/recommendation_menu">Recommendation</a>
+                    <a href="/dashboard/{{ username }}/risk_tolerance">Change Risk Tolerance</a>
+
+                </div>
+            </div>
+{#            {% if session.get('username') %} #Currently have not linked the login function#}
+            <form action="{{ url_for('logout') }}" method="POST" style ="display:inline;">
+                <button type="submit" class="logout-button">
+                        <i class="fas fa-sign-out-alt"></i>Logout
+                </button>
+            </form>
+{#            {% endif %}#}
+        </div>
+    </div>
+    <div class="welcome-section">
+        Welcome, {{ username }}!
+    </div>
+    {% if is_empty %}
+    <div class="empty-portfolio">
+        <p>Your current portfolio is empty. Start adding stocks now!</p>
+        <button class="add-stock-button" onclick="location.href='/dashboard/{{ username }}/add_stock'">Add Stocks</button>
+    </div>
+    {% else %}
+        <div class="container">
+        <!-- Pie Chart (Left Side) -->
+        <div class="chart-container">
+            <h3>Portfolio Allocation</h3>
+            <img src="{{ url_for('portfolio_chart', username=username) }}" class="img-fluid" alt="Portfolio Chart">
+        </div>
+
+        <!-- Table (Right Side) -->
+            <div class="table-container">
+            <h3>Your Portfolio</h3>
+{#         <div class="split-table">#}
+{#            <!-- Table 1: Ticker, Shares, Sector, Purchase Price -->#}
+{#            <table class="table">#}
+{#                <thead>#}
+{#                    <tr>#}
+{#                        <th>Ticker</th>#}
+{#                        <th>Shares</th>#}
+{#                        <th>Sector</th>#}
+{#                        <th>Purchase Price</th>#}
+{#                    </tr>#}
+{#                </thead>#}
+{#                <tbody>#}
+{#                    {% for stock in portfolio %}#}
+{#                    <tr>#}
+{#                        <td>{{ stock.ticker }}</td>#}
+{#                        <td>{{ stock.shares }}</td>#}
+{#                        <td>{{ stock.sector }}</td>#}
+{#                        <td>${{ stock.purchase_price }}</td>#}
+{#                    </tr>#}
+{#                    {% endfor %}#}
+{#                </tbody>#}
+{#            </table>#}
+{##}
+{#            <!-- Table 2: Live Price, Unrealized P/L, Realized P/L -->#}
+{#            <table class="table">#}
+{#                <thead>#}
+{#                    <tr>#}
+{#                        <th>Live Price</th>#}
+{#                        <th>Unrealized P/L</th>#}
+{#                        <th>Realized P/L</th>#}
+{#                    </tr>#}
+{#                </thead>#}
+{#                <tbody>#}
+{#                    {% for stock in portfolio %}#}
+{#                    <tr>#}
+{#                        <td>${{ stock.live_price }}</td>#}
+{#                        <td>${{ stock.unrealized_pnl }}</td>#}
+{#                        <td>${{ stock.realized_pnl }}</td>#}
+{##}
+{#                    </tr>#}
+{#                    {% endfor %}#}
+{#                </tbody>#}
+{#            </table>#}
+                <!-- Portfolio Table -->
+<table class="table">
+  <thead>
+    <tr>
+      <th>Ticker</th>
+      <th>Shares</th>
+      <th>Purchase Price</th>
+      <th>Live Price</th>
+      <th>Value</th>
+      <th>Unrealized P/L</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for stock in portfolio %}
+    <tr>
+      <td>{{ stock.ticker }}</td>
+      <td>{{ stock.shares }}</td>
+      <td>${{ stock.purchase_price }}</td>
+      <td>${{ stock.live_price }}</td>
+      <td>${{ stock.value }}</td>
+      <td>${{ stock.unrealized_pnl }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<!-- Summary Line -->
+<div class="summary-line" style="margin-top: 1rem; font-weight: bold;">
+  Total Realized P/L from Sold Stocks:
+  <span style="color: {{ 'green' if total_realized_pnl >= 0 else 'red' }};">
+    ${{ "{:,.2f}".format(total_realized_pnl) }}
+  </span>
+</div>
+
+            <!-- Export Portfolio Button -->
+            <div class="export-container">
+                <button class="export-button" onclick="location.href='/export_portfolio/{{ username }}'">Export Portfolio</button>
+            </div>
+        </div>
+    </div>
+        </div>
+    {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Import Portfolio Section -->
+    <div class="import-portfolio" id="import-portfolio-section">
+        <h2>Import Portfolio</h2>
+        <form action="/dashboard/{{ username }}/import" method="POST" enctype="multipart/form-data">
+            <label for="csv_file">Choose a CSV file:</label>
+            <input type="file" name="csv_file" id="csv_file" accept=".csv" required>
+            <button type="submit">Submit</button>
+        </form>
+        {% if import_error %}
+            <p style="color: red;">{{ import_error }}</p>
+        {% elif import_success %}
+            <p style="color: green;">Portfolio imported successfully!</p>
+        {% endif %}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="flash-messages">
+            {% for category, message in messages %}
+                <div class="{{ category }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+    </div>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        fetch("/portfolio")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch portfolio data');
+            }
+            return response.json();
+        })
+
+            .then(data => {
+            if (data.error) {
+                document.getElementById("portfolio-table").innerHTML = `<p>${data.error}</p>`;
+                return;
+            })
+
+            // Populate table
+            let tableHTML = `
+                <table border="1">
+                    <tr>
+                        <th>Ticker</th>
+                        <th>Shares</th>
+                        <th>Sector</th>
+                        <th>Purchase Price</th>
+                        <th>Live Price</th>
+                        <th>Unrealized P/L</th>
+                        <th>Realized P/L</th>
+                    </tr>`;
+
+            data.portfolio.forEach(stock => {
+                tableHTML += `
+                    <tr>
+                        <td>${stock.ticker}</td>
+                        <td>${stock.shares}</td>
+                        <td>${stock.sector}</td>
+                        <td>$${stock.purchase_price.toFixed(2)}</td>
+                        <td>${stock.current_price !== "N/A" ? `$${stock.current_price.toFixed(2)}` : "N/A"}</td>
+                        <td>${stock.unrealized_pnl !== "N/A" ? `$${stock.unrealized_pnl.toFixed(2)}` : "N/A"}</td>
+                        <td>$${stock.realized_pnl.toFixed(2)}</td>
+                    </tr>`;
+            });
+
+            tableHTML += `</table>`;
+            document.getElementById("portfolio-table").innerHTML = tableHTML;
+
+            // Render Pie Chart
+            const ctx = document.getElementById("portfolio-chart").getContext("2d");
+            new Chart(ctx, {
+                type: "pie",
+                data: {
+                    labels: Object.keys(data.ticker_values),
+                    datasets: [{
+                        data: Object.values(data.ticker_values),
+                        backgroundColor: ["red", "blue", "green", "orange", "purple"]
+                    }]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: "Portfolio Allocation (by Value)"
+                    }
+                }
+            });
+        })
+        .catch(error => {
+            console.error("Error loading portfolio:", error);
+            document.getElementById("portfolio-table").innerHTML = `<p>Error: ${error.message}</p>`;
+        });
+
+</script>
+</body>
+</html>

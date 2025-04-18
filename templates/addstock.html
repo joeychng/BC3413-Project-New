@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Stock</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+      :root {
+        --primary: #0044cc;
+        --primary-dark: #143bb5;
+      }
+        body {
+            margin: 0;
+            width: 100%;
+            height: 100vh;
+            background: #F9FAFF;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .banner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 350px;
+            background: url('https://i.pinimg.com/736x/eb/93/f9/eb93f90b67e0022291381d4f429e4905.jpg') no-repeat center center/cover;
+            z-index: -1;
+        }
+
+      /* Top Navigation Bar */
+        .top_nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(26, 86, 219, 0.1);
+    border-radius: 12px;
+    max-width: 1200px;
+    margin: 20px auto;
+    width: 100%;
+}
+
+.nav_logo {
+    font-size: 20px;
+    font-weight: 700;
+    color: #0044cc;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav_actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.logout_button {
+    padding: 10px 16px;
+    background-color: #0044cc;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.logout_button:hover {
+    background-color: #143bb5;
+    transform: translateY(-1px);
+}
+
+.back_button {
+    padding: 10px 16px;
+    background-color: #f0f0f0;
+    color: #333;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.back_button:hover {
+    background-color: #e0e0e0;
+}
+
+        .container {
+            width: 800px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            text-align: center;
+            margin-top: 200px;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: black;
+        }
+
+        .form-group {
+            width: 100%;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .form-input {
+            width: 100%;
+            height: 40px;
+            margin: 10px 0;
+            padding: 0 10px;
+            border: 1px solid #999;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .form-button {
+            width: 100%;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 700;
+            margin-top: 20px;
+        }
+        .form-button:hover {
+            background-color: #191970FF;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navigation Bar -->
+<div class="top_nav">
+    <div class="nav_logo">
+        <i class="fas fa-chart-line"></i> EasyFinance
+    </div>
+    <div class="nav_actions">
+        <a href="/dashboard/{{ username }}" class="back_button">
+            <i class="fas fa-arrow-left"></i> Back
+        </a>
+        <form method="POST" action="{{ url_for('logout') }}" style="display:inline;">
+            <button type="submit" class="logout_button">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </form>
+    </div>
+</div>
+
+    <!-- Background Banner -->
+    <div class="banner"></div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <h2>Add Stock</h2>
+
+        <!-- Ticker Input Form -->
+        <form id="addstock-form">
+            <div class="form-group">
+                    <label for="ticker-input">Enter Stock Ticker:</label>
+                    <input type="text" id="ticker-input" class="form-input" placeholder="e.g., AAPL, TSLA" required>
+
+                    <label for="shares">Number of Shares:</label>
+                    <input type="number" id="shares" class="form-input" required>
+
+                    <label for="purchase_date">Purchase Date (YYYY-MM-DD):</label>
+                    <input type="date" id="purchase_date" class="form-input" required>
+
+                    <button type="button" id="check-price" class="form-button">Check Live Price</button>
+
+{#                    <div id="no-add-button">#}
+                    <div id="price-section" style="display: none;">
+                        <p>Live price: $<span id="live-price"></span></p>
+                        <p><strong>Purchase at this price?</strong></p>
+                        <div style="display: flex; gap: 10px; justify-content: center;">
+                            <button type="button" id="yes-add-button" class="form-button" style="background-color: green;">Yes</button>
+                            <button type="button" id="no-add-button" class="form-button">No</button>
+                        </div><br><br>
+
+                    </div>
+
+                    <div id="manual-price-section" style="display: none;">
+                        <label for="purchase_price">Enter Purchase Price:</label>
+                        <input type="number" step="0.01" id="purchase_price" class="form-input">
+                    </div>
+
+                    <button type="submit" class="form-button">Add Stock</button>
+                </form>
+            </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const checkBtn = document.getElementById('check-price');
+    const tickerInput = document.getElementById('ticker-input');
+    const dateInput = document.getElementById('purchase_date');
+    const livePriceSpan = document.getElementById('live-price');
+    const priceSection = document.getElementById('price-section');
+    const manualSection = document.getElementById('manual-price-section');
+    const priceInput = document.getElementById('purchase_price');
+
+    let fetchedPrice = null;
+
+    checkBtn.addEventListener('click', async () => {
+        const ticker = tickerInput.value.trim();
+        const date = dateInput.value.trim();
+
+        if (!ticker || !date) {
+            alert("Please enter both ticker and date");
+            return;
+        }
+
+        const res = await fetch('/get_price', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ ticker: ticker, purchase_date: date })
+        });
+
+        const data = await res.json();
+        if (data.price) {
+            fetchedPrice = data.price;
+            livePriceSpan.textContent = fetchedPrice.toFixed(2);
+            priceSection.style.display = 'block';
+        } else {
+            alert("Price not found for this date.");
+        }
+    });
+document.getElementById('yes-add-button').addEventListener('click', async () => {
+    if (fetchedPrice === null) {
+        alert("Live price not available.");
+        return;
+    }
+
+    // Pre-fill the price input with live price (optional if form needs it)
+    priceInput.value = fetchedPrice.toFixed(2);
+
+    // Submit the form programmatically
+    document.getElementById('addstock-form').requestSubmit();
+});
+
+
+    document.getElementById('no-add-button').addEventListener('click', () => {
+        manualSection.style.display = 'block';
+        priceInput.focus();
+    });
+
+    document.getElementById('addstock-form').addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const ticker = tickerInput.value.trim();
+        const shares = document.getElementById('shares').value;
+        const date = dateInput.value;
+        const price = priceInput.value || fetchedPrice;
+
+        if (!ticker || !shares || !date || !price) {
+            alert("Please fill in all required fields.");
+            return;
+        }
+
+        const response = await fetch(`/dashboard/${encodeURIComponent('{{ username }}')}/add_stock`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                ticker: ticker,
+                shares: shares,
+                purchase_date: date,
+                purchase_price: price
+            })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            alert("Stock added successfully!");
+            window.location.href = `/dashboard/{{ username }}`;
+        } else {
+            alert("Error: " + result.error);
+        }
+    });
+});
+</script>
+
+</body>
+</html>

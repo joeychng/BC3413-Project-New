@@ -1,0 +1,424 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+}
+
+:root {
+	--gjs-t-color-primary: #cf549e;
+	--gjs-t-color-secondary: #b9227d;
+}
+
+.gjs-t-body {
+	background-color: inherit;
+	color: inherit;
+	font-size: 1rem;
+	line-height: 1.75rem;
+}
+
+.gjs-t-h1 {
+	color: var(--gjs-t-color-secondary);
+	font-size: 1.5rem;
+	line-height: 2.5rem;
+}
+
+.gjs-t-h2 {
+	color: #601843;
+	font-size: 1.2rem;
+	line-height: 1.75rem;
+}
+
+.gjs-t-button {
+	background-color: var(--gjs-t-color-primary);
+	color: white;
+	border-radius: 0.3rem;
+}
+
+.gjs-t-link {
+	color: var(--gjs-t-color-primary);
+	text-decoration: underline;
+}
+
+body {
+	background-color: #f0f8ff;
+	font-family: 'Roboto', sans-serif;
+	margin: 0;
+	padding: 0;
+	background: #d6eaf8;
+	text-align: center;
+	width: 100%;
+	height: auto;
+	display: block;
+	justify-content: center;
+	align-items: center;
+	color: #333;
+}
+
+.logo {
+	height: 50px;
+	display: block;
+	margin: 0 auto;
+}
+
+#in9qs {
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+}
+
+.features {
+	display: flex;
+	justify-content: space-around;
+	gap: 20px;
+	margin-top: 30px;
+	background: #3498db;
+	padding: 40px;
+	border-radius: 15px;
+	flex-wrap: nowrap;
+	width: 100%;
+	align-items: center;
+	overflow-x: auto;
+}
+
+.feature-box img {
+	width: 60px;
+	margin-bottom: 10px;
+}
+
+.btn {
+	background: #3498db;
+	color: white;
+	padding: 10px 15px;
+	font-size: 15px;
+	border: none;
+	cursor: pointer;
+	border-radius: 5px;
+	transition: background 0.3s, transform 0.2s;
+	margin: 10px;
+	background-color: #007bff;
+	font-weight: bold;
+}
+
+.btn:hover {
+	background: #2980b9;
+	transform: scale(1.05);
+	background-color: #0056b3;
+}
+
+.help-section img {
+	width: 120px;
+}
+
+h2 {
+	margin: 0 0 10px;
+	font-size: 24px;
+	font-weight: 700;
+	color: black;
+}
+
+p {
+	font-size: 14px;
+	color: #262626;
+}
+
+a {
+	color: #026CDF;
+	font-weight: 700;
+	cursor: pointer;
+}
+
+header {
+	background-color: #0044cc;
+	color: white;
+	display: flex;
+	justify-content: space-between;
+	padding: 15px 30px;
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+nav a {
+	color: white;
+	margin: 0 15px;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.nav-logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+.hero {
+	background-color: #0056b3;
+	color: white;
+	text-align: center;
+	padding: 80px 20px;
+	background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1XjnA9ZRoG5won-KEVK4pwSIhcdw7J3awRQ&s') no-repeat center center/cover;
+}
+
+.who-we-help {
+	display: flex;
+	justify-content: space-around;
+	padding: 40px;
+	flex-wrap: nowrap;
+	align-items: center;
+	gap: 20px;
+	overflow-x: auto;
+}
+
+.feature {
+	background-color: white;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	text-align: center;
+	width: 100%;
+	max-width: 300px;
+	margin: 10px;
+	flex: 1;
+	undefined: undefined;
+	box-sizing: border-box;
+}
+
+.help-card {
+	background-color: white;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	text-align: center;
+	width: 100%;
+	max-width: 300px;
+	margin: 10px;
+	flex: 1;
+}
+
+footer {
+	background-color: #0044cc;
+	color: white;
+	text-align: center;
+	padding: 15px;
+}
+
+.feature img,
+.help-card img {
+	width: 50px;
+	height: 50px;
+	margin-bottom: 10px;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+nav {
+	display: flex;
+	align-items: center;
+}
+
+.btn-register {
+	background-color: #28a745;
+	color: white;
+}
+
+.btn-register:hover {
+	background-color: #218838;
+}
+
+.btn-login {
+	background-color: #007bff;
+	color: white;
+	margin-left: 10px;
+}
+
+.btn-login:hover {
+	background-color: #0056b3;
+}
+
+#is07l {
+	color: rgb(255, 255, 255);
+}
+
+#ieeh7 {
+	background-color: rgba(0, 148, 202, 1);
+}
+
+#features {
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	background-image: linear-gradient(rgba(136, 184, 255, 0.5) 1%, rgba(136, 184, 255, 0.5) 100%);
+	background-position: 0px 0px;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-origin: padding-box;
+	padding-top: 40px;
+	padding-right: 34px;
+	padding-bottom: 40px;
+	padding-left: 40px;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+
+#ik9q0q {
+	color: rgb(255, 255, 255);
+}
+
+#i3gekx {
+	font-size: 18pt;
+}
+
+#iubaan {
+	font-size: 18pt;
+}
+
+#ihj2ia {
+	font-size: 18pt;
+}
+
+#hero {
+	background-image: url("https://www.shutterstock.com/image-illustration/blue-money-business-graph-finance-600nw-2166540277.jpg"), linear-gradient(#0b0c20 1%, #0b0c20 100%);
+	background-position: 650px -200px, 0px 0px;
+	background-size: 600px 600px, 100% 100%;
+	background-repeat: no-repeat, repeat;
+	background-attachment: scroll, scroll;
+	background-origin: padding-box, padding-box;
+}
+
+#i157h {
+	font-size: 14pt;
+}
+
+#iv7b6 {
+	font-family: arial, helvetica, sans-serif;
+}
+
+#i8ivp {
+	color: rgba(244, 238, 238, 0.72);
+	width: 67px;
+	height: 58px;
+	position: relative;
+}
+
+#ild6v {
+	font-size: 18pt;
+}
+
+#iprlj {
+	font-size: 18pt;
+}
+
+#i2pede {
+	font-size: 14pt;
+}
+
+@media (max-width:768px) {
+	header {
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+	}
+
+	nav {
+		flex-direction: column;
+	}
+
+	.features {
+		flex-direction: row;
+		align-items: center;
+		overflow-x: auto;
+		justify-content: flex-start;
+	}
+
+	.who-we-help {
+		flex-direction: row;
+		align-items: center;
+		overflow-x: auto;
+		justify-content: flex-start;
+	}
+
+	.feature {
+		width: 90%;
+		flex: none;
+		min-width: 280px;
+	}
+
+	.help-card {
+		width: 90%;
+		flex: none;
+		min-width: 280px;
+	}
+}
+
+@media (max-width:768px) {
+	header {
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+	}
+
+	nav {
+		flex-direction: column;
+	}
+
+	.features {
+		flex-direction: row;
+		align-items: center;
+		overflow-x: auto;
+		justify-content: flex-start;
+	}
+
+	.who-we-help {
+		flex-direction: row;
+		align-items: center;
+		overflow-x: auto;
+		justify-content: flex-start;
+	}
+
+	.feature {
+		width: 90%;
+		flex: none;
+		min-width: 280px;
+	}
+
+	.help-card {
+		width: 90%;
+		flex: none;
+		min-width: 280px;
+	}
+}
+
+@media (max-width:600px) {
+	.features {
+		flex-direction: column;
+		align-items: center;
+		width: 100%;
+	}
+
+	.btn {
+		width: 100%;
+	}
+}
+
+@media (max-width:600px) {
+	.features {
+		flex-direction: column;
+		align-items: center;
+		width: 100%;
+	}
+
+	.btn {
+		width: 100%;
+	}
+}
