@@ -235,6 +235,16 @@ def reset_password():
 #Dashboard ----------------------------------------------
 @app.route("/dashboard/<username>")
 def dashboard(username):
+     # Check if a user is logged in
+    if 'login_username' not in session:
+        flash("Please log in to access your dashboard.", "error")
+        return redirect(url_for('login'))
+
+    # Prevent users from accessing others' dashboards
+    if session['login_username'] != username:
+        flash("Unauthorized access to another user's dashboard is not allowed.", "error")
+        return redirect(url_for('dashboard', username=session['login_username']))
+
     conn = init_db()
     portfolio_data = view_portfolio(username, conn)  # Fetch portfolio data for table
 
