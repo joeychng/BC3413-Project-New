@@ -319,49 +319,7 @@
         <!-- Table (Right Side) -->
             <div class="table-container">
             <h3>Your Portfolio</h3>
-{#         <div class="split-table">#}
-{#            <!-- Table 1: Ticker, Shares, Sector, Purchase Price -->#}
-{#            <table class="table">#}
-{#                <thead>#}
-{#                    <tr>#}
-{#                        <th>Ticker</th>#}
-{#                        <th>Shares</th>#}
-{#                        <th>Sector</th>#}
-{#                        <th>Purchase Price</th>#}
-{#                    </tr>#}
-{#                </thead>#}
-{#                <tbody>#}
-{#                    {% for stock in portfolio %}#}
-{#                    <tr>#}
-{#                        <td>{{ stock.ticker }}</td>#}
-{#                        <td>{{ stock.shares }}</td>#}
-{#                        <td>{{ stock.sector }}</td>#}
-{#                        <td>${{ stock.purchase_price }}</td>#}
-{#                    </tr>#}
-{#                    {% endfor %}#}
-{#                </tbody>#}
-{#            </table>#}
-{##}
-{#            <!-- Table 2: Live Price, Unrealized P/L, Realized P/L -->#}
-{#            <table class="table">#}
-{#                <thead>#}
-{#                    <tr>#}
-{#                        <th>Live Price</th>#}
-{#                        <th>Unrealized P/L</th>#}
-{#                        <th>Realized P/L</th>#}
-{#                    </tr>#}
-{#                </thead>#}
-{#                <tbody>#}
-{#                    {% for stock in portfolio %}#}
-{#                    <tr>#}
-{#                        <td>${{ stock.live_price }}</td>#}
-{#                        <td>${{ stock.unrealized_pnl }}</td>#}
-{#                        <td>${{ stock.realized_pnl }}</td>#}
-{##}
-{#                    </tr>#}
-{#                    {% endfor %}#}
-{#                </tbody>#}
-{#            </table>#}
+
                 <!-- Portfolio Table -->
 <table class="table">
   <thead>
