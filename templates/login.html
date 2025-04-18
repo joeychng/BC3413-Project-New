@@ -59,6 +59,26 @@
             content: "\f201";
         }
 
+                .back_button {
+    padding: 10px 16px;
+    background-color: #f0f0f0;
+    color: #333;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.back_button:hover {
+    background-color: #e0e0e0;
+}
+
         .box {
             background-color: white;
             border-radius: 15px;
@@ -160,6 +180,9 @@
         <div class="nav_logo">
              <i class="fas fa-chart-line"></i>EasyFinance
         </div>
+        <a href="{{ url_for('homepage') }}" class="back_button">
+          <i class="fas fa-arrow-left"></i> Back
+      </a>
     </div>
 
     <h1>Log in to EasyFinance</h1>
