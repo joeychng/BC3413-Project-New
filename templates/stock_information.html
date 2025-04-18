@@ -6,10 +6,9 @@
     <title>Stock Information</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Defining primary color variable */
         :root {
-            --primary: #0044cc;  /* This is your blue color */
-            --primary-dark: #191970FF; /* Darker version for hover effects */
+            --primary: #0044cc;
+            --primary-dark: #191970FF;
         }
 
         body {
@@ -24,15 +23,14 @@
             position: relative;
         }
 
-        /* Banner (Ensures Background Stays) */
         .banner {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 350px; /* Adjust height for better visibility */
+            height: 350px;
             background: url('https://i.pinimg.com/736x/eb/93/f9/eb93f90b67e0022291381d4f429e4905.jpg') no-repeat center center/cover;
-            z-index: -1; /* Push behind other content */
+            z-index: -1;
         }
 
         .top_nav {
@@ -103,8 +101,6 @@
     background-color: #e0e0e0;
 }
 
-
-        /* Container */
         .container {
             width: 800px;
             background: white;
@@ -112,7 +108,7 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             padding: 40px;
             text-align: center;
-            margin-top: 200px; /* Ensures content isn't covered by banner */
+            margin-top: 200px;
         }
 
         h2 {
@@ -134,7 +130,6 @@
             margin-top: 20px;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .container {
                 width: 90%;
@@ -144,8 +139,6 @@
 </head>
 <body>
 
-
-<!-- Top Navigation Bar (Unified Header) -->
 <div class="top_nav">
     <div class="nav_logo">
         <i class="fas fa-chart-line"></i> EasyFinance
@@ -164,29 +157,16 @@
 </div>
 
 
-    <!-- Banner (Background Image) -->
     <div class="banner"></div>
-
-    <!-- Stock Information Buttons -->
     <div class="container">
         <h2>Stock Information</h2>
-
-        <!-- Input for Ticker Symbol -->
         <input type="text" id="ticker-input" placeholder="Enter stock ticker (e.g. AAPL)" style="width: 100%; height: 40px; padding: 10px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 20px;">
-
-        <!-- Buttons for Stock Recommendations and Market Sentiments -->
         <button class="form-button" id="fetch-stock-info-button" type="button">Fetch Stock Information</button>
         <button class="form-button" id="view-market-sentiments-button" type="button">View Market Sentiments</button>
     </div>
 
-
-
     <script>
-
-        // Get the ticker input element
         const tickerInput = document.getElementById("ticker-input");
-
-        // Handle "Fetch Stock Information" Button
         document.getElementById("fetch-stock-info-button").addEventListener("click", function () {
             const ticker = tickerInput.value.trim().toUpperCase();
             if (ticker) {
@@ -196,8 +176,6 @@
                 alert("Please enter a stock ticker.");
             }
         });
-
-        // Handle "View Market Sentiments" Button
         document.getElementById("view-market-sentiments-button").addEventListener("click", function () {
             const ticker = tickerInput.value.trim().toUpperCase();
             if (ticker) {
@@ -206,25 +184,6 @@
             } else {
                 alert("Please enter a stock ticker.");
             }
-        });
-        // JavaScript for Back Button (if needed)
-        document.getElementById("backButton").addEventListener("click", function () {
-            window.history.back();
-        });
-
-        // Logout button functionality
-        document.getElementById("logoutButton").addEventListener("click", function () {
-            fetch('/logout', { method: 'POST' })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert("You have been logged out.");
-                        window.location.href = "/login"; // Redirect to login page
-                    } else {
-                        alert("Logout failed.");
-                    }
-                })
-                .catch(error => console.error("Logout error:", error));
         });
     </script>
 
