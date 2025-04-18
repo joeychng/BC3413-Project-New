@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Market Sentiment</title>
-    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -26,10 +25,9 @@
 
         hr {
             border: 0;
-            border-top: 1px solid #5e5e5e; /* Line color */
-            margin: 40px 0;  /* Increased space above and below the line */
+            border-top: 1px solid #5e5e5e;
+            margin: 40px 0;
         }
-
 
         .banner {
             position: absolute;
@@ -41,7 +39,19 @@
             z-index: -1;
         }
 
-                        .top_nav {
+        .positive {
+            color: darkgreen;
+        }
+
+        .neutral {
+            color: darkgoldenrod;
+        }
+
+        .negative {
+            color: darkred;
+        }
+
+        .top_nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -144,7 +154,6 @@
 </head>
 <body>
 
-<!-- Top Navigation Bar (Unified Header) -->
 <div class="top_nav">
     <div class="nav_logo">
         <i class="fas fa-chart-line"></i> EasyFinance
@@ -162,12 +171,11 @@
     </div>
 </div>
 
-    <!-- Background Banner -->
-    <div class="banner"></div>
 
-    <!-- Main Container -->
+    <div class="banner"></div>
     <div class="container">
       <h2>Market Sentiment</h2>
+        <hr style="border: 1px solid #1e429f; width: 100%; margin: 0px auto;">
 
         {% if error %}
             <p style="color: red;">{{ error }}</p>
@@ -175,19 +183,13 @@
             <div id="sentiment-info" class="result" style="display: block;">
                 <h3>Overall Sentiment for <span id="sentiment-ticker">{{ ticker }}</span>: <span id="overall-sentiment">{{ overall_sentiment }}</span></h3>
                 <p><strong>Sentiment Score:</strong> <span id="overall-score">{{ sentiment_score }}</span></p>
+            <hr style="border: 1px solid #1e429f; width: 100%; margin: 0px auto;"><br>
                 <div id="sentiment-headlines">
                     {% for headline in headlines %}
                         <div class="headline">
-                            <!-- Display the headline -->
                             <div><strong>{{ headline.headline }}</strong></div>
-
-                            <!-- Display the sentiment score below the headline -->
                             <div><strong>Sentiment Score:</strong> {{ headline.score }}</div>
-
-                            <!-- Display the URL below the sentiment score -->
                             <div><a href="{{ headline.url }}" target="_blank">{{ headline.url }}</a></div>
-
-                            <!-- Add a break line to separate each headline set -->
                             <hr>
                         </div>
                     {% endfor %}
@@ -196,12 +198,19 @@
         {% endif %}
     </div>
 
-{#    <!-- Back Button -->#}
-{#    <button class="back-button" onclick="window.history.back()">#}
-{#        <i class="fas fa-arrow-left"></i> Back#}
-{#    </button>#}
-
 <script>
+    window.onload = function() {
+            const sentiment = document.getElementById('overall-sentiment').textContent.toLowerCase();
+            const sentimentElement = document.getElementById('overall-sentiment');
+            if (sentiment.includes('positive')) {
+                sentimentElement.classList.add('positive');
+            } else if (sentiment.includes('neutral')) {
+                sentimentElement.classList.add('neutral');
+            } else if (sentiment.includes('negative')) {
+                sentimentElement.classList.add('negative');
+            }
+        };
+
 document.addEventListener("DOMContentLoaded", function () {
     const username = "{{ username }}";
     document.getElementById("fetch-stock-info-button").addEventListener("click", function() {
