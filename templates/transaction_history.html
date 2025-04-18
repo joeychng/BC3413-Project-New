@@ -13,13 +13,17 @@
             <i class="fas fa-chart-line"></i> EasyFinance
         </div>
         <div class="nav-actions">
-            <a href="/dashboard" class="nav-button" id="backButton">
+            <a href="javascript:history.back()" class="nav-button">
                 <i class="fas fa-arrow-left"></i> Back
             </a>
-            <a href="{{ url_for('homepage') }}" class="logout-button">
-                <i class="fas fa-sign-out-alt"></i> Logout
+            <a href="{{ url_for('dashboard', username=session['login_username']) }}" class="nav-button">
+                <i class="fas fa-chart-pie"></i> Dashboard
             </a>
-
+             <form action="{{ url_for('logout') }}" method="POST" style="display:inline;">
+                <button type="submit" class="logout-button">
+                    <i class="fas fa-sign-out-alt"></i>Logout
+                </button>
+            </form>
         </div>
     </div>
     <div class="container">
@@ -270,7 +274,6 @@
 
                 const data = await response.json();
 
-                // Create modal to display chart
                 const modal = document.createElement("div");
                 modal.className = "chart-modal";
                 modal.innerHTML = `
@@ -280,16 +283,11 @@
                         <img src="data:image/png;base64,${data.chart}" alt="${ticker} price chart" class="stock-chart">
                     </div>
                 `;
-
                 document.body.appendChild(modal);
-
-                // Add event listener to close button
                 const closeBtn = modal.querySelector(".chart-modal-close");
                 closeBtn.addEventListener("click", () => {
                     document.body.removeChild(modal);
                 });
-
-                // Close modal when clicking outside
                 window.addEventListener("click", (event) => {
                     if (event.target === modal) {
                         document.body.removeChild(modal);
