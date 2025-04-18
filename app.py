@@ -368,19 +368,21 @@ def import_portfolio(username):
 
 
 # User Guide -----------------------------------------------------------------
-@app.route('/dashboard/<username>/user_guide', methods=['GET', 'POST'])
+@app.route("/dashboard/<username>/userguide", methods=["GET", "POST"])
 def userguide(username):
     search_results = []
     query = ""
+    user = User()
+    username = session.get('login_username')
 
     if request.method == 'POST':
         query = request.form.get('company_name', '').strip()
         if query:
-            conn = init_db()
+            conn = sqlite3.connect(DB_NAME)
             search_results = search_company_by_name(conn, query)
             conn.close()
 
-    return render_template('userguide.html', results=search_results, query=query, username=username)
+    return render_template("userguide.html", results=search_results, query=query, username=username)
 
 #Add Stocks-----------------------------
 @app.route("/dashboard/<username>/add_stock", methods=["GET", "POST"])
