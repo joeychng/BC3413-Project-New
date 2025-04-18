@@ -582,7 +582,7 @@ def transaction_history(username):
     if not session_username or session_username != username:
         return redirect(url_for('login'))  # or handle unauthorized access
 
-    conn = init_db()
+    conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
     cursor.execute('''
         SELECT purchase_date, ticker, shares, purchase_price,
