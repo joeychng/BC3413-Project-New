@@ -117,9 +117,8 @@
             color: black;
         }
 
-        /* Display Results by default */
         #stock-info {
-            display: block;  /* Now shown by default, no longer hidden */
+            display: block;  
         }
 
         @media (max-width: 768px) {
@@ -131,8 +130,6 @@
 </head>
 <body>
 
-
-<!-- Top Navigation Bar (Unified Header) -->
 <div class="top_nav">
     <div class="nav_logo">
         <i class="fas fa-chart-line"></i> EasyFinance
@@ -150,16 +147,13 @@
     </div>
 </div>
 
-    <!-- Banner (Background Image) -->
-    <div class="banner"></div>
+       <div class="banner"></div>
 
-    <!-- Main Content -->
     <div class="container">
         <h2>Stock Information</h2>
+        <hr style="border: 1px solid #1e429f; width: 100%; margin: 0px auto;">
 
-        <!-- Stock Info (Directly Visible) -->
         <div id="stock-info" class="result">
-            <h3>Stock Information:</h3>
             <p><strong>Ticker:</strong> {{ ticker }}</p>
             <p><strong>Company Name:</strong> {{ stock_data['Company'] }}</p>
             <p><strong>Sector:</strong> {{ stock_data['Sector'] }}</p>
@@ -169,35 +163,13 @@
             <p><strong>Trailing PE:</strong> {{ stock_data['Trailing PE'] }}</p>
             <p><strong>Forward PE:</strong> {{ stock_data['Forward PE'] }}</p>
 
-            <!-- Stock Chart (Added Dynamically) -->
+            <hr style="border: 1px solid #1e429f; width: 100%; margin: 30px auto;">
+
             <div id="stock-chart-container" style="margin-top: 20px;">
                 <h3>Stock Price Chart (Last 6 Months)</h3>
                 <img id="stock-chart" src="data:image/png;base64,{{ chart }}" alt="Stock Price Chart" style="max-width: 100%; height: auto;">
             </div>
         </div>
     </div>
-
-
-    <script>
-        // JavaScript for Back Button (if needed)
-        document.getElementById("backButton").addEventListener("click", function () {
-            window.history.back();
-        });
-
-        document.getElementById("logoutButton").addEventListener("click", function () {
-            fetch('/logout', { method: 'POST' })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert("You have been logged out.");
-                        window.location.href = "/login"; // Redirect to login page
-                    } else {
-                        alert("Logout failed.");
-                    }
-                })
-                .catch(error => console.error("Logout error:", error));
-        });
-    </script>
-
 </body>
 </html>
