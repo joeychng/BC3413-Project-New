@@ -160,9 +160,10 @@ def view_portfolio(username, conn):
 
     # Query to get only stocks with remaining shares that have not been fully sold
     cursor.execute('''
-               SELECT ticker, SUM(share_check), purchase_price, purchase_date FROM portfolios
+               SELECT ticker, SUM(share_check) as total_shares, purchase_price, purchase_date FROM portfolios
                WHERE username = ? AND shares > 0 AND sale_date IS NULL
                GROUP BY ticker, purchase_price, purchase_date
+               HAVING total_shares > 0
            ''', (username,))
 
     holdings = cursor.fetchall()
