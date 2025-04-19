@@ -374,6 +374,16 @@ def import_portfolio(username):
 # User Guide -----------------------------------------------------------------
 @app.route('/dashboard/<username>/user_guide', methods=['GET', 'POST'])
 def userguide(username):
+    # Check if a user is logged in
+    if 'login_username' not in session:
+        flash("Please log in to access your account.", "error")
+        return redirect(url_for('login'))
+
+    # Prevent users from accessing others' account
+    if session['login_username'] != username:
+        flash("Unauthorized access to another user's account is not allowed.", "error")
+        return redirect(url_for('userguide', username=session['login_username']))
+    
     search_results = []
     query = ""
 
@@ -389,6 +399,17 @@ def userguide(username):
 #Add Stocks---------------------------------------------------------------------
 @app.route("/dashboard/<username>/add_stock", methods=["GET", "POST"])
 def add_stock_route(username):
+
+    # Check if a user is logged in
+    if 'login_username' not in session:
+        flash("Please log in to access your account.", "error")
+        return redirect(url_for('login'))
+
+    # Prevent users from accessing others' account
+    if session['login_username'] != username:
+        flash("Unauthorized access to another user's account is not allowed.", "error")
+        return redirect(url_for('add_stock_route', username=session['login_username']))
+    
     if request.method == "POST":
         data = request.get_json()
         ticker = data.get("ticker", "").upper()
@@ -453,6 +474,17 @@ def get_price():
 # Remove Stocks ----------------------------------------------------------
 @app.route('/dashboard/<username>/remove_stock', methods=['GET', 'POST'])
 def remove_stock(username):
+
+    # Check if a user is logged in
+    if 'login_username' not in session:
+        flash("Please log in to access your account.", "error")
+        return redirect(url_for('login'))
+
+    # Prevent users from accessing others' account
+    if session['login_username'] != username:
+        flash("Unauthorized access to another user's account is not allowed.", "error")
+        return redirect(url_for('remove_stock', username=session['login_username']))    
+    
     if request.method == 'GET':
         return render_template('removestock.html', username=username)
 
@@ -564,6 +596,17 @@ def get_sale_price():
 # Risk Tolerance -----------------------------------------------------------------
 @app.route('/dashboard/<username>/risk_tolerance', methods=['GET', 'POST'])
 def risk_tolerance(username):
+
+    # Check if a user is logged in
+    if 'login_username' not in session:
+        flash("Please log in to access your account.", "error")
+        return redirect(url_for('login'))
+
+    # Prevent users from accessing others' account
+    if session['login_username'] != username:
+        flash("Unauthorized access to another user's account is not allowed.", "error")
+        return redirect(url_for('risk_tolerance', username=session['login_username']))
+        
     user = User()
     username = session.get('login_username')
     new_risk_tolerance = None
@@ -579,9 +622,16 @@ def risk_tolerance(username):
 # Transaction History -------------------------------------------------------
 @app.route('/dashboard/<username>/transaction_history')
 def transaction_history(username):
-    session_username = session.get('login_username')
-    if not session_username or session_username != username:
-        return redirect(url_for('login'))  # or handle unauthorized access
+    
+    # Check if a user is logged in
+    if 'login_username' not in session:
+        flash("Please log in to access your account.", "error")
+        return redirect(url_for('login'))
+
+    # Prevent users from accessing others' account
+    if session['login_username'] != username:
+        flash("Unauthorized access to another user's account is not allowed.", "error")
+        return redirect(url_for('transaction_history', username=session['login_username']))
 
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
@@ -759,6 +809,17 @@ def get_stock_info(username):
 #Recommendation ---------------------------------------------------------------------------------
 @app.route('/dashboard/<username>/recommendation_menu')
 def recommendation_menu(username):
+
+    # Check if a user is logged in
+    if 'login_username' not in session:
+        flash("Please log in to access your account.", "error")
+        return redirect(url_for('login'))
+
+    # Prevent users from accessing others' account
+    if session['login_username'] != username:
+        flash("Unauthorized access to another user's account is not allowed.", "error")
+        return redirect(url_for('recommendation_menu', username=session['login_username']))    
+    
     return render_template("recommendation_menu.html", username=username)
 
 @app.route('/get_stock_recommendation')
