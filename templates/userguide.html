@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/static/navigation_bar.css">
 
     <style>
         /* Reset and base styles */
@@ -54,6 +53,78 @@
         padding-bottom: 5px;
         }
 
+        /* Navigation bar */
+        .nav-bar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 15px 30px;
+          background-color: white;
+          box-shadow: 0 2px 10px rgba(26, 86, 219, 0.1);
+          margin-bottom: 20px;
+          border-radius: 12px;
+          max-width: 1200px;
+          margin: 0 auto 20px auto;
+        }
+
+        .nav-logo {
+          font-size: 20px;
+          font-weight: 700;
+          color: var(--primary);
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .nav-actions {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .nav-button {
+          padding: 10px 16px;
+          background-color: white;
+          color: var(--primary);
+          border: 1px solid var(--primary);
+          border-radius: 8px;
+          font-size: 14px;
+          font-weight: 500;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          transition: all 0.2s ease;
+          text-decoration: none;
+        }
+
+        .nav-button:hover {
+          background-color: var(--primary-lightest);
+          transform: translateY(-1px);
+        }
+
+        .logout-button {
+          padding: 10px 16px;
+          background-color: var(--primary);
+          color: white;
+          border: none;
+          border-radius: 8px;
+          font-size: 14px;
+          font-weight: 500;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          transition: all 0.2s ease;
+          text-decoration: none;
+        }
+
+        .logout-button:hover {
+          background-color: var(--primary-dark);
+          transform: translateY(-1px);
+        }
+
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -100,74 +171,6 @@
             margin-top: 8px;
             border-radius: 2px;
         }
-        .top_nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 30px;
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(26, 86, 219, 0.1);
-            border-radius: 12px;
-            max-width: 1200px;
-            margin: 20px auto;
-            width: 100%;
-        }
-
-.nav_logo {
-    font-size: 20px;
-    font-weight: 700;
-    color: #0044cc;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.nav_actions {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-}
-
-.logout_button {
-    padding: 10px 16px;
-    background-color: #0044cc;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.2s ease;
-}
-
-.logout_button:hover {
-    background-color: #143bb5;
-    transform: translateY(-1px);
-}
-
-.back_button {
-    padding: 10px 16px;
-    background-color: #f0f0f0;
-    color: #333;
-    border: none;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.2s ease;
-    text-decoration: none;
-}
-
-.back_button:hover {
-    background-color: #e0e0e0;
-}
-
 
         .description {
             color: rgba(255, 255, 255, 0.8);
@@ -409,24 +412,21 @@
     </style>
 </head>
 <body>
-
-    <!-- Top Navigation Bar -->
-    <div class="top_nav">
-        <div class="nav_logo">
+    <div class="nav-bar">
+        <div class="nav-logo">
             <i class="fas fa-chart-line"></i> EasyFinance
         </div>
-        <div class="nav_actions">
-            <a href="/dashboard/{{ username }}" class="back_button">
+        <div class="nav-actions">
+            <a href="/dashboard" class="nav-button" id="backButton">
                 <i class="fas fa-arrow-left"></i> Back
             </a>
-            <form method="POST" action="{{ url_for('logout') }}" style="display:inline;">
-                <button type="submit" class="logout_button">
-                    <i class="fas fa-sign-out-alt"></i> Logout
-                </button>
-            </form>
+            <form method="POST" action="{{ url_for('logout') }}">
+            <button type="submit" class="logout-button">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </form>
         </div>
     </div>
-
     <div class="container">
         <div class="header">
             <h1 class="title">User Guide</h1>
@@ -442,14 +442,15 @@
             <li><strong>Import Portfolio:</strong> Import a CSV file if you have an existing portfolio for easier access.</li>
         </ul>
         </div>
+    </div>
 
     <div class="controls">
-        <form method="POST" action="/dashboard/{{ username }}/user_guide">
+        <form method="POST" action="{{ url_for('userguide', username=session.get('login_username')) }}">
         <div class="search-container">
             <!-- Search Box with Icon -->
             <div class="search-box">
                 <i class="fas fa-search search-icon"></i>
-                <input type="text" class="search-input" id="searchInput" name="company_name" placeholder="Search company..." value="{{ query }}">
+                <input type="text" class="search-input" id="searchInput" name="company_name" placeholder="Enter min. 3 letters of your company to search..." value="{{ query }}">
             </div>
             <!-- Search Button Form -->
             <div>
@@ -495,14 +496,20 @@
 </div>
 
 <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Set up back button
+        document.getElementById("backButton").addEventListener("click", (e) => {
+            e.preventDefault();
+            window.history.back();
+        });
+
         // Logout button functionality
-        document.getElementById('logoutButton').addEventListener('click', function() {
+        document.getElementById('logoutButton').addEventListener('click', function () {
             if (confirm('Are you sure you want to logout?')) {
                 alert('Logged out successfully!');
-                // In a real application, you would redirect to login page or clear session
-                // window.location.href = 'login.html';
             }
         });
+    });
 
 </script>
 
