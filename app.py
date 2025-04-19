@@ -961,6 +961,7 @@ def market_sentiment_page(username):
 def logout():
     # Clear the session
     session.pop('username', None)
+    session.clear()
 
     # Redirect to the homepage after logout
     return redirect(url_for('homepage'))
