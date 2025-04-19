@@ -204,7 +204,7 @@
                         </div><br><br>
 
                     </div>
-                    <br><br>
+
                     <div id="manual-price-sale-section" style="display: none;">
                             <label for="sale_price">Enter Selling Price:</label>
                             <input type="number" step="0.01" id="sale_price" class="form-input">
@@ -273,7 +273,6 @@ document.getElementById('yes-sale-button').addEventListener('click', async () =>
 document.getElementById('no-sale-button').addEventListener('click', () => {
     priceInput.value = '';
     manualSection.style.display = 'block';
-    priceSection.style.display = 'none';
 
     priceInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
 });
@@ -310,6 +309,9 @@ document.getElementById('salestock-form').addEventListener('submit', async funct
         alert(result.error || 'Something went wrong.');
     }
 });
+
+document.getElementById('sale_date').setAttribute('max', new Date().toISOString().split('T')[0]);
+
 
 
     </script>
