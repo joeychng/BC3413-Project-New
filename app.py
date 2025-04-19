@@ -906,6 +906,7 @@ def get_market_sentiment(ticker):
 
     # Calculate overall sentiment by calling show_overall_results
     overall_sentiment = show_overall_results(sentiment_scores)
+    overall_sentiment["score"] = f"{overall_sentiment['score']:.4f}"
 
     # Cache the results without timestamp
     cache[ticker] = {
