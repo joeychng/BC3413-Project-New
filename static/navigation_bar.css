@@ -1,4 +1,4 @@
-.top_nav {
+        .top_nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -9,63 +9,64 @@
             max-width: 1200px;
             margin: 20px auto;
             width: 100%;
+
         }
 
-.nav_logo {
-    font-size: 20px;
-    font-weight: 700;
-    color: #0044cc;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
+        .nav_logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0044cc;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-.nav_actions {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-}
+        .nav_actions {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
 
-.logout_button {
-    padding: 10px 16px;
-    background-color: #0044cc;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.2s ease;
-}
+        .logout_button {
+            padding: 10px 16px;
+            background-color: #0044cc;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
 
-.logout_button:hover {
-    background-color: #143bb5;
-    transform: translateY(-1px);
-}
-
-.back_button {
-    padding: 10px 16px;
-    background-color: #f0f0f0;
-    color: #333;
-    border: none;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.2s ease;
-    text-decoration: none;
-}
-
-.back_button:hover {
-    background-color: #e0e0e0;
-}
-.logout-button:hover {
-            background-color: var(--primary-dark);
+        .logout_button:hover {
+            background-color: #143bb5;
             transform: translateY(-1px);
         }
+
+        .back_button {
+            padding: 10px 16px;
+            background-color: #f0f0f0;
+            color: #333;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .back_button:hover {
+            background-color: #e0e0e0;
+        }
+        .logout-button:hover {
+                    background-color: var(--primary-dark);
+                    transform: translateY(-1px);
+                }
