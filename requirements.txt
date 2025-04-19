@@ -3,3 +3,4 @@ yfinance
 prettytable
 nltk
 scipy
+matplotlib
